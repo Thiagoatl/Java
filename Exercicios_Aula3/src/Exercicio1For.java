@@ -15,7 +15,7 @@ public class Exercicio1For {
 
 		if (n1 >= n2) {
 			System.out.println("Intervalo inválido!");
-			
+			System.exit(0);
 		}
 
 		System.out.println("No intervalo entre " + n1 + " e " + n2 + ":");

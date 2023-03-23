@@ -19,7 +19,7 @@ public class Exercicio1Collections {
 			System.out.println(cor);
 		}
 		Collections.sort(cores);
-		System.out.println("Ordenar as cores: ");
+		System.out.println("\nOrdenar as cores: ");
 		for (String cor : cores) {
 			System.out.println(cor);
 		}

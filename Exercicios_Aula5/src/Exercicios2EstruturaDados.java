@@ -33,7 +33,7 @@ public class Exercicios2EstruturaDados {
 	                    System.out.println("\nLivro adicionado!");
 	                    break;
 	                case 2:
-	                    System.out.println("\nLista de Livros na Pilha:");
+	                    System.out.println("\nLista de Livros na Pilha\n:");
 	                    for (String livro : livros) {
 	                        System.out.println(livro);
 	                    }

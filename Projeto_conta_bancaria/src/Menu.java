@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+import conta.model.Conta;
 import conta.util.Cores;
 
 public class Menu {
@@ -12,6 +13,15 @@ public class Menu {
 		int opcao, numero, agencia, tipo, aniversario, numeroDestino;
 		String titular;
 		float saldo, limite, valor;
+		
+		Conta c1 = new Conta(1, 123, 1, "Thiago", 100000.00f);
+		
+		c1.visualizar();
+		
+		c1.depositar(300.00f);
+		
+		c1.visualizar();
+		
 		while (true) {
 
 			System.out.println(Cores.TEXT_GREEN_BOLD + Cores.ANSI_BLACK_BACKGROUND

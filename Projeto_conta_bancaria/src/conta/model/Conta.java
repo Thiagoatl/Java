@@ -80,9 +80,9 @@ public class Conta {
 		case 2 -> tipo = "Conta Poupança";
 		}
 
-		System.out.println("***************");
+		System.out.println("******************************************");
 		System.out.println("             DADOS DA CONTA              ");
-		System.out.println("***************");
+		System.out.println("******************************************");
 		System.out.println("Numero da conta:" + this.numero);
 		System.out.println("Numero da agencia:" + this.agencia);
 		System.out.println("Tipo de conta:" + tipo);

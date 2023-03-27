@@ -6,7 +6,7 @@ public class funcionario {
 	private int idade;
 	private String cargo;
 	private double salario;
-	private boolean ativo;
+	public boolean ativo;
 
 
 
@@ -63,6 +63,6 @@ public class funcionario {
 		System.out.println("Idade: " + idade);
 		System.out.println("Cargo: " + cargo);
 		System.out.println("Salario: " + salario);
-		System.out.println("Ativo: " + ativo);
+		System.out.println("Ativo: " + (ativo ? "Sim" : "Não"));
 	}
 }

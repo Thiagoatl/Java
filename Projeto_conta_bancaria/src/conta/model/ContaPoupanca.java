@@ -9,18 +9,18 @@ public class ContaPoupanca extends Conta {
 		this.limite = limite;
 	}
 	
-	public float getLimite() {
+	public float getAniversario() {
 		return limite;
 	}
 
-	public void setLimite(float limite) {
+	public void setAniversario(float limite) {
 		this.limite = limite;
 	}
 
 	@Override
 	public boolean sacar(float valor) {
 
-		if (this.getSaldo() + this.getLimite() < valor) {
+		if (this.getSaldo() + this.getAniversario() < valor) {
 			System.out.println("\nSaldo é insuficiente!");
 			return false;
 		}
@@ -33,7 +33,7 @@ public class ContaPoupanca extends Conta {
 	@Override
 	public void visualizar() {
 		super.visualizar();
-		System.out.println("Saque Aniversário: " + this.limite);
+		System.out.println("Saque Aniversário: " + this.getAniversario());
 	}
 
 }	

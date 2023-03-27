@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 import conta.model.Conta;
+import conta.model.ContaCorrente;
+import conta.model.ContaPoupanca;
 import conta.util.Cores;
 
 public class Menu {
@@ -14,14 +16,28 @@ public class Menu {
 		String titular;
 		float saldo, limite, valor;
 		
-		Conta c1 = new Conta(1, 123, 1, "Thiago", 100000.00f);
-		
+		Conta c1 = new Conta(1, 123, 1, "Thiagoatl", 100000.00f);
 		c1.visualizar();
 		
-		c1.depositar(300.00f);
+		ContaCorrente cc1 = new ContaCorrente(2, 123, 1, "Arnaldo", 100000.00f, 1000.00f);
+		cc1.visualizar();
 		
-		c1.visualizar();
+		cc1.sacar(100900);
 		
+		cc1.visualizar();
+		
+		cc1.depositar(2000);
+		
+		cc1.visualizar();
+		
+		ContaPoupanca cc2 = new ContaPoupanca(2, 123, 2, "Arnaldo", 100000.00f, 1000.00f);
+		
+		cc2.visualizar();
+		
+		cc2.depositar(2000);
+		
+		cc2.visualizar();
+
 		while (true) {
 
 			System.out.println(Cores.TEXT_GREEN_BOLD + Cores.ANSI_BLACK_BACKGROUND

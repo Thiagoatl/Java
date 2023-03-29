@@ -1,6 +1,7 @@
+import java.io.IOException;
 import java.util.Scanner;
 
-import conta.model.Conta;
+import conta.controller.ContaController;
 import conta.model.ContaCorrente;
 import conta.model.ContaPoupanca;
 import conta.util.Cores;
@@ -15,27 +16,26 @@ public class Menu {
 		int opcao, numero, agencia, tipo, aniversario, numeroDestino;
 		String titular;
 		float saldo, limite, valor;
-		
-		Conta c1 = new Conta(1, 123, 1, "Thiagoatl", 100000.00f);
-		c1.visualizar();
-		
+
+		ContaController contas = new ContaController();
+
 		ContaCorrente cc1 = new ContaCorrente(2, 123, 1, "Arnaldo", 100000.00f, 1000.00f);
 		cc1.visualizar();
-		
+
 		cc1.sacar(100900);
-		
+
 		cc1.visualizar();
-		
+
 		cc1.depositar(2000);
-		
+
 		cc1.visualizar();
-		
+
 		ContaPoupanca cc2 = new ContaPoupanca(2, 123, 2, "Arnaldo", 100000.00f, 1000.00f);
-		
+
 		cc2.visualizar();
-		
+
 		cc2.depositar(2000);
-		
+
 		cc2.visualizar();
 
 		while (true) {
@@ -66,7 +66,7 @@ public class Menu {
 				sobre();
 				System.exit(0);
 			}
-			
+
 			switch (opcao) {
 			case 1 -> {
 				System.out.println("Digite o Numero da Agência: ");
@@ -88,24 +88,29 @@ public class Menu {
 					System.out.println("Digite o Limite de Crédito (R$): ");
 					limite = leia.nextFloat();
 
-					// criar o objeto conta corrente
+					contas.cadastrar(new ContaCorrente(contas.gerarNumero(), agencia, tipo, titular, saldo, limite));
 				}
 				case 2 -> {
 					System.out.println("Digite o dia do Aniversario da Conta: ");
 					aniversario = leia.nextInt();
-
-					// criar o objeto conta poupanca
+					contas.cadastrar(
+							new ContaPoupanca(contas.gerarNumero(), agencia, tipo, titular, saldo, aniversario));
 				}
 				}
 			}
 			case 2 -> {
-				System.out.println("Digite o número da conta: ");
-				aniversario = leia.nextInt();
+				System.out.println("Listar Contas: ");
+				contas.listarTodas();
+				keyPress();
+				break;
 			}
 
 			case 3 -> {
-				System.out.println("Digite o número da conta: ");
+				System.out.println("Consultar dados da conta - por numero\n\n ");
+				System.out.println("Digite o numero da conta: ");
 				numero = leia.nextInt();
+				contas.procurarPorNumero(numero);
+				keyPress();
 
 				// criar o objeto conta poupanca
 			}
@@ -154,19 +159,19 @@ public class Menu {
 			}
 			case 6 -> {
 				System.out.println("Depósito\n\n ");
-				
+
 				System.out.println("Digite o número da conta: ");
 				numero = leia.nextInt();
-				
+
 				System.out.println("Digite o valor do saque: ");
 				valor = leia.nextFloat();
 			}
 			case 7 -> {
 				System.out.println("Depósito\n\n ");
-				
+
 				System.out.println("Digite o número da conta: ");
 				numero = leia.nextInt();
-				
+
 				System.out.println("Digite o valor do deposito: ");
 				valor = leia.nextFloat();
 			}
@@ -183,13 +188,27 @@ public class Menu {
 			}
 
 			}
-			
+
 		}
 	}
+
 	public static void sobre() {
-		System.out.println(Cores.ANSI_BLACK_BACKGROUND + Cores.TEXT_YELLOW + "**************************************************");
+		System.out.println(
+				Cores.ANSI_BLACK_BACKGROUND + Cores.TEXT_YELLOW + "**************************************************");
 		System.out.println("Thiago Almeida Trevisani - thiagoatkl@gmail.com   ");
 		System.out.println("https://github.com/Thiagoatl                      ");
 		System.out.println("**************************************************");
-}
 	}
+
+	public static void keyPress() {
+		try
+
+		{
+			System.out.println(Cores.TEXT_RESET + "Pressione ENTER para continuar");
+			System.in.read();
+		} catch (IOException e) {
+			System.out.println("Erro de digitação!");
+		}
+
+	}
+}

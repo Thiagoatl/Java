@@ -19,25 +19,19 @@ public class Menu {
 
 		ContaController contas = new ContaController();
 
-		ContaCorrente cc1 = new ContaCorrente(2, 123, 1, "Arnaldo", 100000.00f, 1000.00f);
-		cc1.visualizar();
+		ContaCorrente cc1 = new ContaCorrente(contas.gerarNumero(), 123, 1, "João da Silva", 1000f, 100.0f);
+        contas.cadastrar(cc1);
 
-		cc1.sacar(100900);
+        ContaCorrente cc2 = new ContaCorrente(contas.gerarNumero(), 124, 1, "Maria da Silva", 2000f, 100.0f);
+        contas.cadastrar(cc2);
 
-		cc1.visualizar();
+        ContaPoupanca cp1 = new ContaPoupanca(contas.gerarNumero(), 125, 2, "Mariana dos Santos", 4000f, 12);
+        contas.cadastrar(cp1);
 
-		cc1.depositar(2000);
-
-		cc1.visualizar();
-
-		ContaPoupanca cc2 = new ContaPoupanca(2, 123, 2, "Arnaldo", 100000.00f, 1000.00f);
-
-		cc2.visualizar();
-
-		cc2.depositar(2000);
-
-		cc2.visualizar();
-
+        ContaPoupanca cp2 = new ContaPoupanca(contas.gerarNumero(), 125, 2, "Juliana Ramos", 8000f, 15);
+        contas.cadastrar(cp2);
+		
+		
 		while (true) {
 
 			System.out.println(Cores.TEXT_GREEN_BOLD + Cores.ANSI_BLACK_BACKGROUND
@@ -88,13 +82,12 @@ public class Menu {
 					System.out.println("Digite o Limite de Crédito (R$): ");
 					limite = leia.nextFloat();
 
-					contas.cadastrar(new ContaCorrente(contas.gerarNumero(), agencia, tipo, titular, saldo, limite));
+	
 				}
 				case 2 -> {
 					System.out.println("Digite o dia do Aniversario da Conta: ");
 					aniversario = leia.nextInt();
-					contas.cadastrar(
-							new ContaPoupanca(contas.gerarNumero(), agencia, tipo, titular, saldo, aniversario));
+
 				}
 				}
 			}
@@ -117,8 +110,8 @@ public class Menu {
 			case 4 -> {
 				System.out.println("Digite o número da conta: ");
 				numero = leia.nextInt();
-
-				tipo = 1;
+				tipo = contas.retornaTipo(numero);
+				
 				// condicional buscar na collection
 
 				System.out.println("Digite o Numero da Agência: ");
@@ -136,13 +129,13 @@ public class Menu {
 				case 1 -> {
 					System.out.println("Digite o Limite de Crédito (R$): ");
 					limite = leia.nextFloat();
-
+					contas.atualizar(new ContaCorrente(numero, agencia, tipo, titular, saldo, limite));
 					// criar o objeto conta corrente
 				}
 				case 2 -> {
 					System.out.println("Digite o dia do Aniversario da Conta: ");
 					aniversario = leia.nextInt();
-
+					contas.atualizar(new ContaPoupanca(numero, agencia, tipo, titular, saldo, aniversario));
 					// criar o objeto conta poupanca
 
 				}
@@ -154,8 +147,12 @@ public class Menu {
 			}
 
 			case 5 -> {
+				System.out.println("Apagar conta \n\n ");
+				
 				System.out.println("Digite o número da conta: ");
 				numero = leia.nextInt();
+				
+				contas.deletar(numero);
 			}
 			case 6 -> {
 				System.out.println("Depósito\n\n ");
@@ -165,6 +162,7 @@ public class Menu {
 
 				System.out.println("Digite o valor do saque: ");
 				valor = leia.nextFloat();
+				contas.sacar(numero, valor);
 			}
 			case 7 -> {
 				System.out.println("Depósito\n\n ");
@@ -174,6 +172,8 @@ public class Menu {
 
 				System.out.println("Digite o valor do deposito: ");
 				valor = leia.nextFloat();
+				
+				contas.depositar(numero, valor);
 			}
 			case 8 -> {
 				System.out.println("Digite o Numero da Conta de Origem: ");
@@ -185,6 +185,9 @@ public class Menu {
 					System.out.println("Digite o Valor da Transferência (R$): ");
 					valor = leia.nextFloat();
 				} while (valor <= 0);
+				contas.transferir(numero, numeroDestino, valor);
+				keyPress();
+				break;
 			}
 
 			}
